@@ -6,9 +6,12 @@ cache: npm
 branches:
   only:
     - master # build master branch only
-script:
+install:
+  - npm install
+  - npm install hexo-deployer-git --save
+script:  
   - hexo clean
-  - hexo generate # generate static files
+  - hexo d -g # generate static files
 deploy:
   provider: pages
   skip-cleanup: true
