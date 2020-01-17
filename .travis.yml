@@ -6,6 +6,8 @@ cache: npm
 branches:
   only:
     - master # build master branch only
+before_install:
+  - export TZ='Asia/Shanghai' # 更改时区
 install:
   - npm install  
 script:  
@@ -14,11 +16,12 @@ script:
 after_script:
   - cd ./public
   - git init
-  - git config user.name "jim"
+  - git config user.name "aji88"
   - git config user.email "y_m_z@126.com"
   - git add .
   - git commit -m "add/edit"
   - git push --force "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
   - echo "https://${GH_TOKEN}@${GH_REF}"
+  - ls ./
 global:
   GH_REF: github.com/aji88/blog.git
