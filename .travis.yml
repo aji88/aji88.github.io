@@ -13,10 +13,6 @@ install:
 script:
 - hexo clean
 - hexo g
-deploy:
-  provider:script
-  script:sh ./.travis/deploy.sh
-  skip_cleanup:true
-  on:
-    branch:master
+after_script:
+- sh ./.travis/deploy.sh
 
