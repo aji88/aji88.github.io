@@ -7,16 +7,17 @@ branches:
   only:
     - master # build master branch only
 install:
-  - npm install
-  - npm install hexo-deployer-git --save
+  - npm install  
 script:  
   - hexo clean
-  - hexo d -g # generate static files
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GH_TOKEN
-  keep-history: true
-  on:
-    branch: master
-  local-dir: public
+  - hexo g # generate static files
+after_script:
+  cd ./public
+  git init
+  git config user.name "jim"
+  git config user.email "y_m_z@126.com"
+  git add .
+  git commit -m "add/edit"
+  git push --force --quiet "https://${github_token}@${GH_REF}" master:gh-pages
+global:
+  GH_REF: github.com/aji88/blog.git
