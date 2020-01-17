@@ -1,40 +1,18 @@
 ---
-title: New Article Title Here for you12
+title: Travis CI 部署hexo到github
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+GitHub版本管理hexo写的博客源代码，Travis CI自动生成并部署到github的另外分支。完成自动部属。
+以下所有的操作都在Linux下完成，window下不保证能成功。
 
 <!--more-->
 
-## Quick Start
+## Travis CI 客户端的安装
+````ruby
 
-### Create a new post
+gem install travis
 
-``` bash
-$ hexo new "My New Post"
-```
+````
 
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
+## 生成SSH公私钥匙文件
+## Travis CI 加密ssh密钥
+## 修改 .travis.yml文件
