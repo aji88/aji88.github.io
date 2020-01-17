@@ -7,23 +7,40 @@ GitHub版本管理hexo写的博客源代码，Travis CI自动生成并部署到g
 <!--more-->
 
 ## Travis CI 客户端的安装
-````ruby
-
+````
 gem install travis
-
 ````
 
 ## 生成SSH公私钥匙文件
 ````sh
-
 ssh-keygen -t rsa -C 'youremail' -b 4096 -f ./deploy_rsa
-
 ````
+
 ## Travis CI 加密ssh密钥
 ````
 travis login --pro
 travis encrypt-file deploy_rsa --add -r 'owener/reposity' --pro
 ````
+这里的--pro不能少，否则会显示repository not known to https://api.travis-ci.org/:
+
+## 把部署文件写成deploy.sh脚本
+````sh
+#!/bin/bash
+# deploy
+openssl aes-256-cbc -K $encrypted_b7e9f3138b36_key -iv $encrypted_b7e9f3138b36_iv -in ./deploy_rsa.enc -out ~/.ssh/deploy_rsa -d
+chmod 600 ~/.ssh/deploy_rsa
+eval $(ssh-agent)
+ssh-add ~/.ssh/
+cp ./ssh_config ~/.ssh/config
+cd ../public
+git init
+git config --global user.name "github user name"
+git config --global user.email "github email account"
+git add .
+git commit -m "add/edit"
+git push --force 仓库地址 master:gh-pages
+````
+
 ## 修改 .travis.yml文件
 ````ruby
 sudo: false
