@@ -1,8 +1,10 @@
 ---
 title: Travis CI 部署hexo到github
 ---
-GitHub版本管理hexo写的博客源代码，Travis CI自动生成并部署到github的另外分支。完成自动部属。
+GitHub版本管理hexo写的博客源代码，Travis CI自动生成并部署到github的另外分支。完成自动部署。 
+
 以下所有的操作都在Linux下完成，window下不保证能成功。
+
 
 <!--more-->
 
@@ -22,6 +24,10 @@ ssh-keygen -t rsa -C 'youremail' -b 4096 -f ./deploy_rsa
 travis login --pro
 travis encrypt-file deploy_rsa --add -r 'owener/reposity' --pro
 ````
+把生成的deploy_rsa.enc文件复制到同目录的.travis目录下，如果目录不存在，则新建一个目录。 
+
+这个deploy_rsa.enc文件是travis加密的私钥文件，只能travis解密。
+
 这里的--pro不能少，否则会显示repository not known to https://api.travis-ci.org/:
 
 ## SSH配置文件ssh_config
