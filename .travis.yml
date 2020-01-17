@@ -23,7 +23,7 @@ after_script:
   - git config user.email "y_m_z@126.com"
   - git add .
   - git commit -m "add/edit"
-  - git push --force https://$GH_TOKEN@github.com/aji88/aji88.github.io.git master:gh-pages
+  - git push --force https://$GH_TOKEN@github.com/aji88/aji88.github.io.git :gh-pages
   - echo ${GH_TOKEN}@${GH_REF}
   - ls ./
 global:
