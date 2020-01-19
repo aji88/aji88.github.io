@@ -1,5 +1,0 @@
-Host github.com
-User git
-StrictHostKeyChecking no
-IdentityFile ~/.ssh/deploy_rsa
-IdentitiesOnly yes
