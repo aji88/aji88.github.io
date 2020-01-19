@@ -7,10 +7,10 @@ ssh-add ~/.ssh/
 cp ./ssh_config ~/.ssh/config
 git config --global user.name "aji88"
 git config --global user.email "y_m_z@126.com"
-cd ../public
-git init
-git config user.name "aji88"
-git config user.email "y_m_z@126.com"
-git add .
-git commit -m "add/edit"
-git push --force git@github.com:aji88/blog.git hexo:master
+#cd ../public
+#git init
+#git config user.name "aji88"
+#git config user.email "y_m_z@126.com"
+#git add .
+#git commit -m "add/edit"
+#git push --force git@github.com:aji88/blog.git hexo:master
