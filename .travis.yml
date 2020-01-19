@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+node_js:
+- 10
+cache: npm
+branches:
+  only:
+  - hexo
+before_install:
+- export TZ='Asia/Shanghai'
+install:
+- npm install
+script:
+- hexo clean
+- hexo g
+after_script:
+- cd ./.travis
+- sh ./deploy.sh
+
