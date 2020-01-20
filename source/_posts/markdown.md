@@ -2,7 +2,10 @@
 
 title: markdown语法详情
 date: 2019-12-27 15:44:24
+categories:
+- markdown
 tags:
+- markdown
 ---
 
 我展示的是一级标题
