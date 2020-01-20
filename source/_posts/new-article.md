@@ -1,5 +1,6 @@
 ---
 title: Travis CI 部署hexo到github
+date: 2020-01-15 15:44:24
 ---
 GitHub版本管理hexo写的博客源代码，Travis CI自动生成并部署到github的另外分支。完成自动部署。  
 **以下**所有的操作都在Linux下完成，window下不保证能成功。
