@@ -2,10 +2,8 @@
 menu:
   主页: /
   目录: /archives
+  分类: /categories
   标签: /tags
-  旅行: /tags/旅行/
-  摄影: http://shenyu-vip.lofter.com
-  关于我: /2019/about
 
 # 网站图标和侧边栏logo
 favicon: /favicon.ico
@@ -49,7 +47,7 @@ word_count:
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 2
+reward_type: 0
 # 打赏wording
 reward_wording: '请我喝杯咖啡吧~'
 # 支付宝二维码图片地址，跟你设置logo的方式一样。比如：/images/alipay.jpg
@@ -89,7 +87,7 @@ gitalk:
 # GitHub Ribbons(https://github.blog/2008-12-19-github-ribbons/)
 github: 
   # (关闭请设置为false)
-  url: https://github.com/Shen-Yu/hexo-theme-ayer
+  url: false
 
 # fancybox(仅用于相册展示，若需要可配置albums)
 fancybox: true
