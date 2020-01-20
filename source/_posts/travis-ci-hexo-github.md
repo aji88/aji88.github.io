@@ -1,7 +1,7 @@
 ---
 title: Travis CI 部署hexo到github
 date: 2020-01-15 15:44:24
-category:
+categories:
 - travis ci
 tags:
 - travis ci
