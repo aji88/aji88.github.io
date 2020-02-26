@@ -150,6 +150,7 @@ git log --since=2.weeks
 该命令可用的格式十分丰富——可以是类似 "2008-01-15" 的具体的某一天，也可以是类似 "2 years 1 day 3 minutes ago" 的相对日期。
 
 在 限制 git log [输出的选项](https://git-scm.com/book/zh/v2/ch00/rlimit_options) 中列出了常用的选项
+
 | 选项 | 说明 |
 | ---- | ---- |
 |  -(n) | 仅显示最近的 n 条提交。|
