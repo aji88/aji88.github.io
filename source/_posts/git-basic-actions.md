@@ -97,5 +97,5 @@ git commit -m 'message'
 
 如果你觉得 git add 提交缓存的流程太过繁琐，Git 也允许你用 -a 选项跳过这一步。
 ````
-git commit -a -m 'message'
+git commit -am 'message'
 ````
