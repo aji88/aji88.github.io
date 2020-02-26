@@ -107,7 +107,7 @@ git commit -am 'message'
 git commit -amend
 ````
 
-##查看提交历史
+## 查看提交历史
 ### git log [的常用选项](https://git-scm.com/book/zh/v2/ch00/rlog_options)
 ````
 #不带参数显示
