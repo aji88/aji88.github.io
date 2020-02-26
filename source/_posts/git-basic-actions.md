@@ -37,6 +37,11 @@ git clone git@github.com:account/repositories.git
 git status
 ````
 
+## 取消工作区的修改(没有暂存的内容)
+````
+git checkout -- filename
+````
+
 ## 提交变化到暂存区(add)
 详见[官方文档](https://git-scm.com/docs/git-add)
 ````
@@ -48,6 +53,7 @@ git add .
 git add -A
 git add -all
 ````
+
 ## 撤回暂存区的提交
 ````
 #撤销所有
@@ -78,6 +84,18 @@ diff：git diff --stat
 ````
 
 ## 提交暂存区文件到仓库
+使用 git add 命令将想要快照的内容写入缓存区， 而执行 git commit 将缓存区内容添加到仓库中。
+Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步需要配置用户名和邮箱地址。
+````
+git config --global user.name 'runoob'
+git config --global user.email test@runoob.com
+````
+提交到本地仓库
 ````
 git commit -m 'message'
+````
+
+如果你觉得 git add 提交缓存的流程太过繁琐，Git 也允许你用 -a 选项跳过这一步。
+````
+git commit -a -m 'message'
 ````
