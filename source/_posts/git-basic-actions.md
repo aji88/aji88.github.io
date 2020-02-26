@@ -47,8 +47,10 @@ git checkout -- filename
 ````
 #提交指定文件
 git add filename
+
 #提交所有修改和新增的文件，不包括删除的
 git add .
+
 #提交所有的文件，包括：新增、修改、删除
 git add -A
 git add -all
