@@ -106,7 +106,9 @@ git commit -amend
 ````
 
 ##查看提交历史
+### git log [的常用选项](https://git-scm.com/book/zh/v2/ch00/rlog_options)
 ````
+#不带参数显示
 git log
 
 #显示每次提交所引入的差异,使用 -2 选项来仅显示最近的两次提交
@@ -115,4 +117,44 @@ git log -p -2
 #当进行代码审查，或者快速浏览某个搭档提交的 commit 所带来的变化的时候，这个参数就非常有用了。 
 #你也可以为 git log 附带一系列的总结性选项。 比如你想看到每次提交的简略统计信息，可以使用 --stat 选项
 git log --stat
+
+#不同格式的展示方式,oneline,short,full,fuller
+git log --pretty=oneline
+
+#还可以定制自己的format
+git log --pretty=format:"%h - %an, %ar : %s"
 ````
+git log --pretty=format [常用的选项](https://git-scm.com/book/zh/v2/ch00/rpretty_format) 列出了常用的格式占位符写法及其代表的意义
+
+| 选项 | 说明 |
+| ---- | ---- |
+|  --p | 按补丁格式显示每个提交引入的差异。|
+|  --stat | 显示每次提交的文件修改统计信息。|
+|  --shortstat | 只显示 --stat 中最后的行数修改添加移除统计。|
+|  --name-only | 仅在提交信息后显示已修改的文件清单。|
+|  --name-status | 显示新增、修改、删除的文件清单。|
+|  --abbrev-commit | 仅显示 SHA-1 校验和所有 40 个字符中的前几个字符。|
+|  --relative-date | 使用较短的相对时间而不是完整格式显示日期（比如，“2 weeks ago”）。|
+|  --graph | 在日志旁以 ASCII 图形显示分支与合并历史。|
+|  --pretty | 使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（用来定义自己的格式）。|
+
+### 限制输出长度
+除了定制输出格式的选项之外，git log 还有许多非常实用的限制输出长度的选项，也就是只输出一部分的提交.
+
+列出最近两周的所有提交
+````
+git log --since=2.weeks
+````
+该命令可用的格式十分丰富——可以是类似 "2008-01-15" 的具体的某一天，也可以是类似 "2 years 1 day 3 minutes ago" 的相对日期。
+
+在 限制 git log [输出的选项](https://git-scm.com/book/zh/v2/ch00/rlimit_options) 中列出了常用的选项
+| 选项 | 说明 |
+| ---- | ---- |
+|  -(n) | 仅显示最近的 n 条提交。|
+|  --since, --after | 仅显示指定时间之后的提交。|
+|  --until, --before | 仅显示指定时间之前的提交。|
+|  --author | 仅显示作者匹配指定字符串的提交。|
+|  --committer | 仅显示提交者匹配指定字符串的提交。|
+|  --grep | 仅显示提交说明中包含指定字符串的提交。|
+|  -S | 仅显示添加或删除内容匹配指定字符串的提交。|
+
