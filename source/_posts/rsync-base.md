@@ -63,6 +63,9 @@ rsync -axv dir1 root@192.168.10.2::/dir2
 
 # 192.168.10.2的/dir2同步到本地dir1
 rsync -axv root@192.168.10.2::/dir2 dir1
+
+rsync -av -e "ssh -l ssh-user" rsync-user@host::module /dest
+
 ````
 
 ## 服务器端/客户端 daemon守护进程
@@ -75,7 +78,8 @@ sync -av /home/vagrant/download jim@192.168.10.3::ftp --password-file=/etc/rsync
 ````
 
 ## 服务器端配置文件
-1.服务器端的配置文件默认为 /etc/rsyncd.conf,如果文件不存在，可以新增如下文件:
+1.服务器端的配置文件默认为 /etc/rsyncd.conf,此文件的权限必须是600,可以man rsyncd.conf查看配置说明
+如果文件不存在，可以新增如下文件:
 ````bash
 # /etc/rsyncd: configuration file for rsync daemon mode
 
