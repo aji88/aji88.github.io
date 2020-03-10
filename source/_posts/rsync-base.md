@@ -73,7 +73,7 @@ rsync --daemon --config=/etc/rsyncd.conf
 sync -av /home/vagrant/download jim@192.168.10.3::ftp --password-file=/etc/rsyncd.pwd
 ````
 
-##服务器端配置文件
+## 服务器端配置文件
 1.服务器端的配置文件默认为 /etc/rsyncd.conf,如果文件不存在，可以新增如下文件:
 ````bash
 # /etc/rsyncd: configuration file for rsync daemon mode
