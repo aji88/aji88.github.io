@@ -9,7 +9,7 @@ tags:
 
 ## rsync参数详解
 rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samba.org/ftp/rsync/rsync.html)
-
+<!--more-->
 
 | 参数 | 说明|
 |:-----| :---- |
