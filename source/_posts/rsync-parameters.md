@@ -13,11 +13,11 @@ rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samb
 
 | 参数 | 说明|
 |:-----| :---- |
-| -v, --verbose | 显示rsync过程中详细信息。可以使用"-vvvv"获取更详细信息。|
-| -P,--partial --progress | 显示文件传输的进度信息。(实际上"-P"="--partial --progress"，其中的"--progress"才是显示进度信息的)。| 
+| -v, --verbose | 显示rsync过程中详细信息。<br/>可以使用"-vvvv"获取更详细信息。|
+| -P,--partial --progress | 显示文件传输的进度信息。| 
 | -q, --quiet | 精简输出模式 | 
 | -c, --checksum | 打开校验开关，强制对文件传输进行校验 | 
-| -a, --archive | 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD | 
+| -a, --archive | 归档模式，表示以递归方式传输文件，并保持所有文件属性，<br>等于-rlptgoD | 
 | -r, --recursive |  对子目录以递归模式处理| 
 -R, --relative | 使用相对路径信息| 
 -b, --backup | 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。| 
@@ -25,7 +25,7 @@ rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samb
 | -suffix=SUFFIX | 定义备份文件前缀| | 
 | -u, --update | 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)| 
 | -l, --links | 保留软链结| 
-| -L, --copy-links | 想对待常规文件一样处理软链结| 
+| -L, --copy-links | 像对待常规文件一样处理软链结| 
 | --copy-unsafe-links | 仅仅拷贝指向SRC路径目录树以外的链结| 
 | --safe-links | 忽略指向SRC路径目录树以外的链结| 
 | -H, --hard-links | 保留硬链结| 
@@ -36,7 +36,7 @@ rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samb
 | -t, --times | 保持文件时间信息| 
 | -S, --sparse | 对稀疏文件进行特殊处理以节省DST的空间| 
 | -n, --dry-run | 仅测试传输，而不实际传输。常和"-vvvv"配合使用来查看rsync是如何工作的| 
-| -W, --whole-file rsync| 将不再使用增量传输，而是全量传输。在网络带宽高于磁盘带宽时，该选项比增量传输更高效。| 
+| -W, --whole-file | 将不再使用增量传输，<br>而是全量传输。在网络带宽高于磁盘带宽时，该选项比增量传输更高效。| 
 | -x, --one-file-system  | 不要跨越文件系统边界 |
 | -B, --block-size=SIZE  | 检验算法使用的块尺寸，默认是700字节 |
 | -e, --rsh=COMMAND  | 指定使用rsh、ssh方式进行数据同步 |
@@ -57,10 +57,10 @@ rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samb
 | --modify-window=NUM  | 决定文件是否时间相同时使用的时间戳窗口，默认为0 |
 | -T --temp-dir=DIR  | 在DIR中创建临时文件 |
 | --compare-dest=DIR  | 同样比较DIR中的文件来决定是否需要备份 |
-| -P 等同于 --partial |
-| --progress 显示备份过程 |
+| -P |等同于 --partial |
+| --progress |显示备份过程 |
 | -z, --compress  | 对备份的文件在传输时进行压缩处理 |
-| --exclude=PATTERN  | 指定排除不需要传输的文件模式 |
+| --exclude=PATTERN | 指定排除不需要传输的文件模式 |
 | --include=PATTERN  | 指定不排除而需要传输的文件模式 |
 | --exclude-from=FILE  | 排除FILE中指定模式的文件 |
 | --include-from=FILE  | 不排除FILE指定模式匹配的文件 |
