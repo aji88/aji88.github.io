@@ -12,7 +12,7 @@ logo: /images/ayer-side.svg
 # 封面配置
 # enable-是否启用封面；path-封面背景图；logo-封面logo
 cover:
-  enable: true
+  enable: false
   path: /images/cover1.jpg  # images目录下附送多张美图，可更换
   logo: false #/images/ayer.svg，如果不要直接设置成false
 
@@ -110,7 +110,7 @@ baidu_analytics: ''
 mathjax: false
 
 # 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)
-since: 2015
+since: 2019
 
 #是否显示页脚信息(建议保留，有助于本主题的推广)
 pageFooter: true
