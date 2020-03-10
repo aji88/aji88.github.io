@@ -10,11 +10,6 @@ tags:
 ## rsync参数详解
 rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samba.org/ftp/rsync/rsync.html)
 
-<style type="text/css">
-table th td:first {
-    min-width:150px;
-}
-<style>
 
 | 参数 | 说明|
 |:-----| :---- |
