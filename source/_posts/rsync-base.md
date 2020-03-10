@@ -1,6 +1,6 @@
 ---
 title: rsync入门
-date: 2020-02-26 14:57:24
+date: 2020-03-10 11:20:24
 categories:
 - linux
 tags:
