@@ -4,11 +4,12 @@ date: 2020-03-10 11:37:24
 categories:
 - linux
 tags:
-- linux rsync
+- linux,rsync
 ---
 
 ## rsync参数详解
 rsync官方网站: [https://www.samba.org/ftp/rsync/rsync.html](https://www.samba.org/ftp/rsync/rsync.html)
+
 <!--more-->
 
 | 参数 | 说明|

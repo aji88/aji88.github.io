@@ -4,7 +4,7 @@ date: 2020-03-10 11:20:24
 categories:
 - linux
 tags:
-- linux rsync
+- linux,rsync
 ---
 
 ## rsync简介
