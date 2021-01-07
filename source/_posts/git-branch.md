@@ -17,6 +17,22 @@ git branch
   develop
   master
 
+#列出所有分支，包括本地的，远程的
+git branch -a
+
+* hexo
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/hexo
+  remotes/origin/master
+
+#查看远程分支列表
+git branch -r
+
+origin/HEAD -> origin/master
+  origin/hexo
+  origin/master
+
 #查看每一个分支的最后一次提交
 git branch -v
 
