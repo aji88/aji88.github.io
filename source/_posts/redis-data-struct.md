@@ -53,6 +53,10 @@ zset的成员是唯一的,但分数(score)却可以重复。
 512MB = 2^9 * 2^3（byte） * 2^10（kb） * 2^10(mb) = 2^32（bit）
 
 位图的最大优点之一，存储信息时可以节省大量空间
+
+[相关使用场景：点击这里](https://www.cnblogs.com/wuhaidong/articles/10389484.html)
+
+[Redis之位图和HyperLogLog实战详解](https://blog.csdn.net/monokai/article/details/106757822?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai)
 ## hyperLog
 属于一种概率算法，(LC,LLC,HLL)三种越来越节省内存，降低误差率
 ## Geospatial Indexes
