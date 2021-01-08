@@ -39,7 +39,7 @@ Redis的内存淘汰机制策略有8种
 <img src="https://gitio-1253604119.cos.ap-shenzhen-fsi.myqcloud.com/20748911-43565b0005252556.webp" width="90%">
 
 
-##Redis占用内存大小
+## Redis占用内存大小
 ````
 //设置Redis最大占用内存大小为100M（修改redis.conf文件）
 maxmemory 100mb
@@ -52,7 +52,7 @@ maxmemory 100mb
 ````
 >如果不设置最大内存大小或者设置最大内存大小为0，在64位操作系统下不限制内存大小，在32位操作系统下最多使用3GB内存
 
-##配置设置
+## 配置设置
 
 ````
 #获取当前内存淘汰策略
