@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="啤酒瓶里泡枸杞" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    rsync入门 |  He王
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-rsync-base" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  rsync入门
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/10/rsync-base/" class="article-date">
+  <time datetime="2020-03-10T03:20:24.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">930字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="rsync简介"><a href="#rsync简介" class="headerlink" title="rsync简介"></a>rsync简介</h2><p>rsync官方网站: <a href="https://www.samba.org/ftp/rsync/rsync.html" target="_blank" rel="noopener">https://www.samba.org/ftp/rsync/rsync.html</a></p>
+<p>rsync是可以实现增量备份的工具。配合任务计划，rsync能实现定时或间隔同步，配合inotify或sersync，可以实现触发式的实时同步。</p>
+<p>rsync可以实现scp的远程拷贝(rsync不支持远程到远程的拷贝，但scp支持)、cp的本地拷贝、rm删除和”ls -l”显示文件列表等功能。但需要注意的是，rsync的最终目的或者说其原始目的是实现两端主机的文件同步，因此实现的scp/cp/rm等功能仅仅只是同步的辅助手段，且rsync实现这些功能的方式和这些命令是不一样的。事实上，rsync有一套自己的算法，其算法原理以及rsync对算法实现的机制可能比想象中要复杂一些。平时使用rsync实现简单的备份、同步等功能足以，没有多大必要去深究这些原理性的内容。但是想要看懂rsync命令的man文档、使用”-vvvv”分析rsync执行过程，以及实现rsync更强大更完整的功能，没有这些理论知识的支持是绝对不可能实现的。本篇文章将简单介绍rsync的使用方法和它常用的功能</p>
+<a id="more"></a>
+
+<h2 id="centos-7上rsync的安装"><a href="#centos-7上rsync的安装" class="headerlink" title="centos 7上rsync的安装"></a>centos 7上rsync的安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum安装</span></span><br><span class="line">yum install -y rsync</span><br><span class="line"></span><br><span class="line"><span class="comment">#编译安装</span></span><br><span class="line">wget https://download.samba.org/pub/rsync/rsync-3.1.3.tar.gz</span><br><span class="line">tar -xvf rsync-3.1.3.tar.gz</span><br><span class="line"><span class="built_in">cd</span> rsync-3.1.3</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/rsync/</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="rsync的基本语法"><a href="#rsync的基本语法" class="headerlink" title="rsync的基本语法"></a>rsync的基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 详细语法可以 man rsync</span><br><span class="line">Local:  rsync [OPTION...] SRC... [DEST]</span><br><span class="line"></span><br><span class="line">Access via remote shell:</span><br><span class="line">    Pull: rsync [OPTION...] [USER@]HOST:SRC... [DEST]</span><br><span class="line">    Push: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br><span class="line"></span><br><span class="line">Access via rsync daemon:</span><br><span class="line">    Pull: rsync [OPTION...] [USER@]HOST::SRC... [DEST]</span><br><span class="line">        rsync [OPTION...] rsync:&#x2F;&#x2F;[USER@]HOST[:PORT]&#x2F;SRC... [DEST]</span><br><span class="line">    Push: rsync [OPTION...] SRC... [USER@]HOST::DEST</span><br><span class="line">        rsync [OPTION...] SRC... rsync:&#x2F;&#x2F;[USER@]HOST[:PORT]&#x2F;DEST</span><br></pre></td></tr></table></figure>
+
+<h2 id="rsync-本地文件同步"><a href="#rsync-本地文件同步" class="headerlink" title="rsync 本地文件同步"></a>rsync 本地文件同步</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同步dir1下的所有文件和文件夹到dir2目录</span></span><br><span class="line">rsync -axv dir1 dir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步dir1下的所有文件和文件夹到dir2目录，但不包括dir1目录</span></span><br><span class="line">rsync -axv dir1/ dir2</span><br></pre></td></tr></table></figure>
+
+<h2 id="rsync-通过ssh同步到远程机器"><a href="#rsync-通过ssh同步到远程机器" class="headerlink" title="rsync 通过ssh同步到远程机器"></a>rsync 通过ssh同步到远程机器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地dir1同步到192.168.10.2的/dir2</span></span><br><span class="line">rsync -axv dir1 root@192.168.10.2::/dir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 192.168.10.2的/dir2同步到本地dir1</span></span><br><span class="line">rsync -axv root@192.168.10.2::/dir2 dir1</span><br><span class="line"></span><br><span class="line">rsync -av -e <span class="string">"ssh -l ssh-user"</span> rsync-user@host::module /dest</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器端-客户端-daemon守护进程"><a href="#服务器端-客户端-daemon守护进程" class="headerlink" title="服务器端/客户端 daemon守护进程"></a>服务器端/客户端 daemon守护进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#服务器端</span></span><br><span class="line">rsync --daemon --config=/etc/rsyncd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#客户端</span></span><br><span class="line">sync -av /home/vagrant/download jim@192.168.10.3::ftp --password-file=/etc/rsyncd.pwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器端配置文件"><a href="#服务器端配置文件" class="headerlink" title="服务器端配置文件"></a>服务器端配置文件</h2><p>1.服务器端的配置文件默认为 /etc/rsyncd.conf,此文件的权限必须是600,可以man rsyncd.conf查看配置说明<br>如果文件不存在，可以新增如下文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/rsyncd: configuration file for rsync daemon mode</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># See rsyncd.conf man page for more options.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># configuration example:</span></span><br><span class="line"></span><br><span class="line">uid = rsync</span><br><span class="line">gid = rsync</span><br><span class="line">use chroot = yes</span><br><span class="line">max connections = 20</span><br><span class="line"></span><br><span class="line">pid file = /var/run/rsyncd.pid</span><br><span class="line">lock file=/var/rsynclog/rsync.lock</span><br><span class="line"><span class="built_in">log</span> file=/var/rsynclog/rsyncd.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局设置</span></span><br><span class="line"><span class="comment"># exclude = lost+found/</span></span><br><span class="line"><span class="comment"># transfer logging = yes</span></span><br><span class="line"><span class="comment"># timeout = 900</span></span><br><span class="line"><span class="comment"># ignore nonreadable = yes</span></span><br><span class="line"><span class="comment"># dont compress   = *.gz *.tgz *.zip *.z *.Z *.rpm *.deb *.bz2</span></span><br><span class="line"><span class="comment"># read only = false</span></span><br><span class="line"><span class="comment"># hosts allow = 192.168.253.0/24</span></span><br><span class="line"><span class="comment"># hosts deny = 0.0.0.0/32 </span></span><br><span class="line"><span class="comment"># auth users = rsync_backup </span></span><br><span class="line"><span class="comment"># secrets file = /etc/rsync.password </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模块</span></span><br><span class="line"><span class="comment"># 同步语法: rsync -axv dir1 rsync@remote::/ftp</span></span><br><span class="line">[ftp]</span><br><span class="line">    path = /home/ftp                    <span class="comment"># 需要同步的路径</span></span><br><span class="line">    comment = ftp <span class="built_in">export</span> area           <span class="comment"># 注解说明</span></span><br><span class="line">    secrets file=/etc/rsyncd.secrets    <span class="comment"># 授权用户密码文件</span></span><br><span class="line">    <span class="built_in">read</span> only = <span class="literal">false</span>                   <span class="comment"># 可写</span></span><br><span class="line">    auth users = kob                    <span class="comment"># 授权用户</span></span><br></pre></td></tr></table></figure>
+
+<p>2.生成用户账号配置文件，/etc/rsyncd.secrets,每一行标识一个用户，格式为 用户名:密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kob:rsyncpwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置客户端用户密码文件"><a href="#配置客户端用户密码文件" class="headerlink" title="配置客户端用户密码文件"></a>配置客户端用户密码文件</h2><p>只需要填写访问用户的密码即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsyncpwd</span><br></pre></td></tr></table></figure>
+<p>客户端推送同步(push)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync -av /home/vagrant/download kob@192.168.10.3::ftp --password-file=/etc/rsyncd.pwd</span><br></pre></td></tr></table></figure>
+
+<p>客户端拉取同步(pull)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync -av kob@192.168.10.3::ftp --password-file=/etc/rsyncd.pwd /home/vagrant/download</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.eggbing.com/2020/03/10/rsync-base/" data-id="ckjnz78vu000q3cmz65axdlns"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux-rsync/" rel="tag">linux,rsync</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/10/rsync-parameters/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            rsync 参数详解
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/02/26/git-remote/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">GIT 远程仓库</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: false,
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2021
+        Jim yang
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="He王"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">目录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      document.getElementById(e.target.innerText).scrollIntoView()
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

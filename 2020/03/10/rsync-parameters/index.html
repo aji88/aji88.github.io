@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="啤酒瓶里泡枸杞" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    rsync 参数详解 |  He王
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-rsync-parameters" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  rsync 参数详解
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/10/rsync-parameters/" class="article-date">
+  <time datetime="2020-03-10T03:37:24.000Z" itemprop="datePublished">2020-03-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.1k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="rsync参数详解"><a href="#rsync参数详解" class="headerlink" title="rsync参数详解"></a>rsync参数详解</h2><p>rsync官方网站: <a href="https://www.samba.org/ftp/rsync/rsync.html" target="_blank" rel="noopener">https://www.samba.org/ftp/rsync/rsync.html</a></p>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-v, –verbose</td>
+<td align="left">显示rsync过程中详细信息。<br/>可以使用”-vvvv”获取更详细信息。</td>
+</tr>
+<tr>
+<td align="left">-P,–partial –progress</td>
+<td align="left">显示文件传输的进度信息。</td>
+</tr>
+<tr>
+<td align="left">-q, –quiet</td>
+<td align="left">精简输出模式</td>
+</tr>
+<tr>
+<td align="left">-c, –checksum</td>
+<td align="left">打开校验开关，强制对文件传输进行校验</td>
+</tr>
+<tr>
+<td align="left">-a, –archive</td>
+<td align="left">归档模式，表示以递归方式传输文件，并保持所有文件属性，<br>等于-rlptgoD</td>
+</tr>
+<tr>
+<td align="left">-r, –recursive</td>
+<td align="left">对子目录以递归模式处理</td>
+</tr>
+<tr>
+<td align="left">-R, –relative</td>
+<td align="left">使用相对路径信息</td>
+</tr>
+<tr>
+<td align="left">-b, –backup</td>
+<td align="left">创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用–suffix选项来指定不同的备份文件前缀。</td>
+</tr>
+<tr>
+<td align="left">–backup-dir</td>
+<td align="left">将备份文件(如~filename)存放在在目录下。</td>
+</tr>
+<tr>
+<td align="left">-suffix=SUFFIX</td>
+<td align="left">定义备份文件前缀</td>
+</tr>
+<tr>
+<td align="left">-u, –update</td>
+<td align="left">仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)</td>
+</tr>
+<tr>
+<td align="left">-l, –links</td>
+<td align="left">保留软链结</td>
+</tr>
+<tr>
+<td align="left">-L, –copy-links</td>
+<td align="left">像对待常规文件一样处理软链结</td>
+</tr>
+<tr>
+<td align="left">–copy-unsafe-links</td>
+<td align="left">仅仅拷贝指向SRC路径目录树以外的链结</td>
+</tr>
+<tr>
+<td align="left">–safe-links</td>
+<td align="left">忽略指向SRC路径目录树以外的链结</td>
+</tr>
+<tr>
+<td align="left">-H, –hard-links</td>
+<td align="left">保留硬链结</td>
+</tr>
+<tr>
+<td align="left">-p, –perms</td>
+<td align="left">保持文件权限</td>
+</tr>
+<tr>
+<td align="left">-o, –owner</td>
+<td align="left">保持文件属主信息</td>
+</tr>
+<tr>
+<td align="left">-g, –group</td>
+<td align="left">保持文件属组信息</td>
+</tr>
+<tr>
+<td align="left">-D, –devices</td>
+<td align="left">保持设备文件信息</td>
+</tr>
+<tr>
+<td align="left">-t, –times</td>
+<td align="left">保持文件时间信息</td>
+</tr>
+<tr>
+<td align="left">-S, –sparse</td>
+<td align="left">对稀疏文件进行特殊处理以节省DST的空间</td>
+</tr>
+<tr>
+<td align="left">-n, –dry-run</td>
+<td align="left">仅测试传输，而不实际传输。常和”-vvvv”配合使用来查看rsync是如何工作的</td>
+</tr>
+<tr>
+<td align="left">-W, –whole-file</td>
+<td align="left">将不再使用增量传输，<br>而是全量传输。在网络带宽高于磁盘带宽时，该选项比增量传输更高效。</td>
+</tr>
+<tr>
+<td align="left">-x, –one-file-system</td>
+<td align="left">不要跨越文件系统边界</td>
+</tr>
+<tr>
+<td align="left">-B, –block-size=SIZE</td>
+<td align="left">检验算法使用的块尺寸，默认是700字节</td>
+</tr>
+<tr>
+<td align="left">-e, –rsh=COMMAND</td>
+<td align="left">指定使用rsh、ssh方式进行数据同步</td>
+</tr>
+<tr>
+<td align="left">–rsync-path=PATH</td>
+<td align="left">指定远程服务器上的rsync命令所在路径信息</td>
+</tr>
+<tr>
+<td align="left">-C, –cvs-exclude</td>
+<td align="left">使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件</td>
+</tr>
+<tr>
+<td align="left">–existing</td>
+<td align="left">仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件</td>
+</tr>
+<tr>
+<td align="left">–delete</td>
+<td align="left">删除那些DST中SRC没有的文件</td>
+</tr>
+<tr>
+<td align="left">–delete-excluded</td>
+<td align="left">同样删除接收端那些被该选项指定排除的文件</td>
+</tr>
+<tr>
+<td align="left">–delete-after</td>
+<td align="left">传输结束以后再删除</td>
+</tr>
+<tr>
+<td align="left">–ignore-errors</td>
+<td align="left">及时出现IO错误也进行删除</td>
+</tr>
+<tr>
+<td align="left">–max-delete=NUM</td>
+<td align="left">最多删除NUM个文件</td>
+</tr>
+<tr>
+<td align="left">–partial</td>
+<td align="left">保留那些因故没有完全传输的文件，以是加快随后的再次传输</td>
+</tr>
+<tr>
+<td align="left">–force</td>
+<td align="left">强制删除目录，即使不为空</td>
+</tr>
+<tr>
+<td align="left">–numeric-ids</td>
+<td align="left">不将数字的用户和组ID匹配为用户名和组名</td>
+</tr>
+<tr>
+<td align="left">–timeout=TIME</td>
+<td align="left">IP超时时间，单位为秒</td>
+</tr>
+<tr>
+<td align="left">-I, –ignore-times</td>
+<td align="left">不跳过那些有同样的时间和长度的文件</td>
+</tr>
+<tr>
+<td align="left">–size-only</td>
+<td align="left">当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间</td>
+</tr>
+<tr>
+<td align="left">–modify-window=NUM</td>
+<td align="left">决定文件是否时间相同时使用的时间戳窗口，默认为0</td>
+</tr>
+<tr>
+<td align="left">-T –temp-dir=DIR</td>
+<td align="left">在DIR中创建临时文件</td>
+</tr>
+<tr>
+<td align="left">–compare-dest=DIR</td>
+<td align="left">同样比较DIR中的文件来决定是否需要备份</td>
+</tr>
+<tr>
+<td align="left">-P</td>
+<td align="left">等同于 –partial</td>
+</tr>
+<tr>
+<td align="left">–progress</td>
+<td align="left">显示备份过程</td>
+</tr>
+<tr>
+<td align="left">-z, –compress</td>
+<td align="left">对备份的文件在传输时进行压缩处理</td>
+</tr>
+<tr>
+<td align="left">–exclude=PATTERN</td>
+<td align="left">指定排除不需要传输的文件模式</td>
+</tr>
+<tr>
+<td align="left">–include=PATTERN</td>
+<td align="left">指定不排除而需要传输的文件模式</td>
+</tr>
+<tr>
+<td align="left">–exclude-from=FILE</td>
+<td align="left">排除FILE中指定模式的文件</td>
+</tr>
+<tr>
+<td align="left">–include-from=FILE</td>
+<td align="left">不排除FILE指定模式匹配的文件</td>
+</tr>
+<tr>
+<td align="left">–version</td>
+<td align="left">打印版本信息</td>
+</tr>
+<tr>
+<td align="left">–address</td>
+<td align="left">绑定到特定的地址</td>
+</tr>
+<tr>
+<td align="left">–config=FILE</td>
+<td align="left">指定其他的配置文件，不使用默认的rsyncd.conf文件</td>
+</tr>
+<tr>
+<td align="left">–port=PORT</td>
+<td align="left">指定其他的rsync服务端口,默认为873端口</td>
+</tr>
+<tr>
+<td align="left">–blocking-io</td>
+<td align="left">对远程shell使用阻塞IO</td>
+</tr>
+<tr>
+<td align="left">-stats</td>
+<td align="left">给出某些文件的传输状态</td>
+</tr>
+<tr>
+<td align="left">–progress</td>
+<td align="left">在传输时现实传输过程</td>
+</tr>
+<tr>
+<td align="left">–log-format=formAT</td>
+<td align="left">指定日志文件格式</td>
+</tr>
+<tr>
+<td align="left">–password-file=FILE</td>
+<td align="left">daemon模式时的密码文件，可以从中读取密码实现非交互式。注意，这不是远程shell认证的密码，而是rsync模块认证的密码。</td>
+</tr>
+<tr>
+<td align="left">–bwlimit=KBPS</td>
+<td align="left">限制I/O带宽，KBytes per second</td>
+</tr>
+<tr>
+<td align="left">-h, –help</td>
+<td align="left">显示帮助信息</td>
+</tr>
+</tbody></table>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.eggbing.com/2020/03/10/rsync-parameters/" data-id="ckjnz78vv000s3cmzaf7mgz41"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux-rsync/" rel="tag">linux,rsync</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/10/inotify-base/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            inotify简介
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/10/rsync-base/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">rsync入门</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: false,
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2021
+        Jim yang
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="He王"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">目录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      document.getElementById(e.target.innerText).scrollIntoView()
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

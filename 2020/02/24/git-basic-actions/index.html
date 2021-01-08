@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="啤酒瓶里泡枸杞" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    git基础操作 |  He王
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-git-basic-actions" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  git基础操作
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/24/git-basic-actions/" class="article-date">
+  <time datetime="2020-02-24T08:46:24.000Z" itemprop="datePublished">2020-02-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.2k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>git的<a href="https://git-scm.com/" target="_blank" rel="noopener">官方网站</a><br>git的<a href="https://git-scm.com/docs/" target="_blank" rel="noopener">官方文档</a><br>git的各种常用基础操作</p>
+<h2 id="初始化-init"><a href="#初始化-init" class="headerlink" title="初始化(init)"></a>初始化(init)</h2><p>详见<a href="https://git-scm.com/docs/git-init" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#使用当前目录作为仓库</span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line">#使用指定目录作为仓库</span><br><span class="line">git init newrepro</span><br></pre></td></tr></table></figure>
+
+<h2 id="克隆远程仓库-clone"><a href="#克隆远程仓库-clone" class="headerlink" title="克隆远程仓库(clone)"></a>克隆远程仓库(clone)</h2><p>详见<a href="https://git-scm.com/docs/git-clone" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#格式</span><br><span class="line">git clone &lt;repo&gt;</span><br><span class="line">#克隆到指定目录</span><br><span class="line">git clone &lt;repo&gt; &lt;directory&gt;</span><br><span class="line"></span><br><span class="line">git clone git@github.com:account&#x2F;repositories.git</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="查看当前仓库状态-status"><a href="#查看当前仓库状态-status" class="headerlink" title="查看当前仓库状态(status)"></a>查看当前仓库状态(status)</h2><p>详见<a href="https://git-scm.com/docs/git-status" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h2 id="取消工作区的修改-没有暂存的内容"><a href="#取消工作区的修改-没有暂存的内容" class="headerlink" title="取消工作区的修改(没有暂存的内容)"></a>取消工作区的修改(没有暂存的内容)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- filename</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交变化到暂存区-add"><a href="#提交变化到暂存区-add" class="headerlink" title="提交变化到暂存区(add)"></a>提交变化到暂存区(add)</h2><p>详见<a href="https://git-scm.com/docs/git-add" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#提交指定文件</span><br><span class="line">git add filename</span><br><span class="line"></span><br><span class="line">#提交所有修改和新增的文件，不包括删除的</span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line">#提交所有的文件，包括：新增、修改、删除</span><br><span class="line">git add -A</span><br><span class="line">git add -all</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤回暂存区的提交"><a href="#撤回暂存区的提交" class="headerlink" title="撤回暂存区的提交"></a>撤回暂存区的提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#撤销所有</span><br><span class="line">git reset HEAD -- .</span><br><span class="line"></span><br><span class="line">#撤销特定目标</span><br><span class="line">git reset HEAD -- filename </span><br><span class="line"></span><br><span class="line">#将文件从缓存中删除</span><br><span class="line">git rm -cached filepath</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看改动"><a href="#查看改动" class="headerlink" title="查看改动"></a>查看改动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#尚未缓存(暂存)的改动</span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line">#查看已缓存的改动</span><br><span class="line">git diff --cached</span><br><span class="line"></span><br><span class="line">#查看已缓存的与未缓存的所有改动</span><br><span class="line">git diff HEAD</span><br><span class="line"></span><br><span class="line">#显示摘要而非整个</span><br><span class="line">diff：git diff --stat</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交暂存区文件到仓库"><a href="#提交暂存区文件到仓库" class="headerlink" title="提交暂存区文件到仓库"></a>提交暂存区文件到仓库</h2><p>使用 git add 命令将想要快照的内容写入缓存区， 而执行 git commit 将缓存区内容添加到仓库中。<br>Git 为你的每一个提交都记录你的名字与电子邮箱地址，所以第一步需要配置用户名和邮箱地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &#39;runoob&#39;</span><br><span class="line">git config --global user.email test@runoob.com</span><br></pre></td></tr></table></figure>
+<p>提交到本地仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#39;message&#39;</span><br></pre></td></tr></table></figure>
+
+<p>如果你觉得 git add 提交缓存的流程太过繁琐，Git 也允许你用 -a 选项跳过这一步。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &#39;message&#39;</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会将暂存区中的文件提交。 如果自上次提交以来你还未做任何修改（例如，在上次提交后马上执行了此命令），那么快照会保持不变，而你所修改的只是提交信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -amend</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h2><h3 id="git-log-的常用选项"><a href="#git-log-的常用选项" class="headerlink" title="git log 的常用选项"></a>git log <a href="https://git-scm.com/book/zh/v2/ch00/rlog_options" target="_blank" rel="noopener">的常用选项</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#不带参数显示</span><br><span class="line">git log</span><br><span class="line"></span><br><span class="line">#显示每次提交所引入的差异,使用 -2 选项来仅显示最近的两次提交</span><br><span class="line">git log -p -2</span><br><span class="line"></span><br><span class="line">#当进行代码审查，或者快速浏览某个搭档提交的 commit 所带来的变化的时候，这个参数就非常有用了。 </span><br><span class="line">#你也可以为 git log 附带一系列的总结性选项。 比如你想看到每次提交的简略统计信息，可以使用 --stat 选项</span><br><span class="line">git log --stat</span><br><span class="line"></span><br><span class="line">#不同格式的展示方式,oneline,short,full,fuller</span><br><span class="line">git log --pretty&#x3D;oneline</span><br><span class="line"></span><br><span class="line">#还可以定制自己的format</span><br><span class="line">git log --pretty&#x3D;format:&quot;%h - %an, %ar : %s&quot;</span><br></pre></td></tr></table></figure>
+<p>git log –pretty=format <a href="https://git-scm.com/book/zh/v2/ch00/rpretty_format" target="_blank" rel="noopener">常用的选项</a> 列出了常用的格式占位符写法及其代表的意义</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–p</td>
+<td>按补丁格式显示每个提交引入的差异。</td>
+</tr>
+<tr>
+<td>–stat</td>
+<td>显示每次提交的文件修改统计信息。</td>
+</tr>
+<tr>
+<td>–shortstat</td>
+<td>只显示 –stat 中最后的行数修改添加移除统计。</td>
+</tr>
+<tr>
+<td>–name-only</td>
+<td>仅在提交信息后显示已修改的文件清单。</td>
+</tr>
+<tr>
+<td>–name-status</td>
+<td>显示新增、修改、删除的文件清单。</td>
+</tr>
+<tr>
+<td>–abbrev-commit</td>
+<td>仅显示 SHA-1 校验和所有 40 个字符中的前几个字符。</td>
+</tr>
+<tr>
+<td>–relative-date</td>
+<td>使用较短的相对时间而不是完整格式显示日期（比如，“2 weeks ago”）。</td>
+</tr>
+<tr>
+<td>–graph</td>
+<td>在日志旁以 ASCII 图形显示分支与合并历史。</td>
+</tr>
+<tr>
+<td>–pretty</td>
+<td>使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（用来定义自己的格式）。</td>
+</tr>
+</tbody></table>
+<h3 id="限制输出长度"><a href="#限制输出长度" class="headerlink" title="限制输出长度"></a>限制输出长度</h3><p>除了定制输出格式的选项之外，git log 还有许多非常实用的限制输出长度的选项，也就是只输出一部分的提交.</p>
+<p>列出最近两周的所有提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --since&#x3D;2.weeks</span><br></pre></td></tr></table></figure>
+<p>该命令可用的格式十分丰富——可以是类似 “2008-01-15” 的具体的某一天，也可以是类似 “2 years 1 day 3 minutes ago” 的相对日期。</p>
+<p>在 限制 git log <a href="https://git-scm.com/book/zh/v2/ch00/rlimit_options" target="_blank" rel="noopener">输出的选项</a> 中列出了常用的选项</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-(n)</td>
+<td>仅显示最近的 n 条提交。</td>
+</tr>
+<tr>
+<td>–since, –after</td>
+<td>仅显示指定时间之后的提交。</td>
+</tr>
+<tr>
+<td>–until, –before</td>
+<td>仅显示指定时间之前的提交。</td>
+</tr>
+<tr>
+<td>–author</td>
+<td>仅显示作者匹配指定字符串的提交。</td>
+</tr>
+<tr>
+<td>–committer</td>
+<td>仅显示提交者匹配指定字符串的提交。</td>
+</tr>
+<tr>
+<td>–grep</td>
+<td>仅显示提交说明中包含指定字符串的提交。</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>仅显示添加或删除内容匹配指定字符串的提交。</td>
+</tr>
+</tbody></table>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.eggbing.com/2020/02/24/git-basic-actions/" data-id="ckjnz78v100003cmzc1z9c98l"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/02/26/git-remote/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            GIT 远程仓库
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/02/24/git-branch/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">git分支基础操作</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: false,
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2021
+        Jim yang
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="He王"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">目录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      document.getElementById(e.target.innerText).scrollIntoView()
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
